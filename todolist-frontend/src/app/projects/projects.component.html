@@ -1,0 +1,29 @@
+<div *ngIf="!selectedProject && !selectedUser">
+    <h1>PROJECTS</h1>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of projects;">
+                    <td>{{p.title}}</td>
+                    <td><button (click)="$event.preventDefault && setProject(p)">Open</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="selectedProject">
+    <app-details [project]="selectedProject" [close]="closeDetail()">
+    </app-details>
+</div>
+
+<div *ngIf="selectedUser">
+    <app-user-tasks [user]="selectedUser"></app-user-tasks>
+</div>

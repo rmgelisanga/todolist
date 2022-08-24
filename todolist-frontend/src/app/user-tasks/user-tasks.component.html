@@ -1,0 +1,35 @@
+<div>
+
+    <div class="title-wrapper">
+        <h1>{{user | titlecase}}'s Project List</h1>
+    </div>
+    <div class="table-wrapper">
+        <table class="">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Members</th>
+                    <th>Estimated Hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of userProjects;">
+                    <td>{{p.title}}</td>
+                    <td>
+                        <a class="a-member" *ngFor="let member of p.task_user" [routerLink]="['/']"
+                            [queryParams]="{user: member.username}">
+                            {{member.username}}
+                        </a>
+                    </td>
+                    <td>{{getTotal(p.task_user)}}</td>
+                    <td><button>View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <button [routerLink]="['']">Back</button>
+    </footer>
+</div>

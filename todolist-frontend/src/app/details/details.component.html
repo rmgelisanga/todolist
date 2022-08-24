@@ -1,0 +1,32 @@
+<div *ngIf="project">
+
+    <div class="title-wrapper">
+        <h1>{{project.title}}</h1>
+        <h2>{{total}}</h2>
+    </div>
+    <div class="table-wrapper">
+        <table class="">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Assigned to</th>
+                    <th>Estimated Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of project.tasks;">
+                    <td>{{p.task}}</td>
+                    <td>
+                        <a [routerLink]="['/']" [queryParams]="{user: p.user.username}">
+                            {{p.user.username}}
+                        </a>
+                    </td>
+                    <td>{{p.hours}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <button (click)="handleClose()">Back</button>
+    </footer>
+</div>

@@ -29,12 +29,7 @@ Route::get('/projects', function () {
 });
 
 Route::get('/getUserTask', function () {
-    // DB::enableQueryLog();
-
     DB::statement("SET SQL_MODE=''");
-    // $result = User::with(['projects.taskUser' => function ($query) {
-    //     $query->select(DB::raw('sum(hours) as hours'), 'username')->groupBy(DB::raw('tasks.project_id,users.id'));
-    // }])->where('username', request()->user)->first()->projects;
 
     $result = User::with(['projects' => function ($query) {
         $query->groupBy('id')->with(['taskUser' => function ($query) {
@@ -42,11 +37,6 @@ Route::get('/getUserTask', function () {
         }]);
     }])->where('username', request()->user)->first()->projects;
 
-    // $result = User::with(['projects' => function ($query) {
-    //     $query->with(['tasks' => ['user']]);
-    // }])->where('username', request()->user)->first()->projects;
-
-    // dd(DB::getQueryLog());
 
     return response()->json(['data' => $result]);
 });
